@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ['192.168.1.64'],
   turbopack: {
     rules: {
-      "*.css": {
+      "globals.css": {
         loaders: ["@tailwindcss/turbopack"],
         as: "*.css",
       },
