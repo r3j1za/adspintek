@@ -39,6 +39,8 @@ export default function AddRecord() {
   }
 
   useEffect(() => {
+    // Load saved history from localStorage after mount (not available during SSR).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     loadActivities();
 
     window.addEventListener('focus', loadActivities);

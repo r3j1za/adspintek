@@ -7,6 +7,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     rules: {
       "*.css": {
+        // Only run the Tailwind loader on plain CSS files that import Tailwind,
+        // so compiled SCSS modules are left to Next.js' built-in handling.
+        condition: {
+          all: [
+            { not: "foreign" },
+            { path: /\.css$/ },
+            { content: /@import\s+["']tailwindcss["']/ },
+          ],
+        },
         loaders: ["@tailwindcss/turbopack"],
         as: "*.css",
       },
