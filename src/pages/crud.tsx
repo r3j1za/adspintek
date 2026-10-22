@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import scss from '../styles/landingPage.module.scss';
 
 type Student = {
@@ -11,6 +12,7 @@ type Student = {
 type Activity = {
   id: string;
   studentId: string;
+  studentName: string;
   action: 'Added' | 'Updated' | 'Deleted';
   previousName: string;
   previousCourse: string;
@@ -27,6 +29,8 @@ export default function Crud() {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    // Load saved records from localStorage after mount (not available during SSR).
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setStudents(JSON.parse(localStorage.getItem('students') || '[]'));
     setLoaded(true);
   }, []);
@@ -71,6 +75,7 @@ export default function Crud() {
 
       logActivity({
         studentId: editId,
+        studentName: newName,
         action: 'Updated',
         previousName: oldStudent.name,
         previousCourse: oldStudent.course,
@@ -89,6 +94,7 @@ export default function Crud() {
 
       logActivity({
         studentId: id,
+        studentName: newName,
         action: 'Added',
         previousName: '-',
         previousCourse: '-',
@@ -113,6 +119,7 @@ export default function Crud() {
 
     logActivity({
       studentId: student.id,
+      studentName: student.name,
       action: 'Deleted',
       previousName: student.name,
       previousCourse: student.course,
@@ -133,7 +140,7 @@ export default function Crud() {
     <div className={scss.appWrapper}>
       <header className={scss.navbar}>
         <h2>Student Management</h2>
-        <a href="/addrecord">View Activity Log</a>
+        <Link href="/addrecord">View Activity Log</Link>
       </header>
 
       <main className={scss.main}>

@@ -19,7 +19,7 @@ export default function Home() {
 
       <main className={scss.main}>
         <section id="home" className={scss.home}>
-          <h1>Hello, I'm RJ Mendoza</h1>
+          <h1>Hello, I&apos;m RJ Mendoza</h1>
           <p>Welcome to my personal portfolio!</p>
         </section>
 
